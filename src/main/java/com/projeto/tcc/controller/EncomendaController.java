@@ -25,7 +25,7 @@ public class EncomendaController {
     @Autowired
     private TokenService tokenService;
 
-    @GetMapping("/encomendas/operador")
+    @GetMapping("/operador/encomendas")
     public List<EncomendaDTO> listarEncomendasDoOperador(@RequestHeader("Authorization") String auth) {
         String token = auth.replace("Bearer ", "");
         
@@ -38,7 +38,7 @@ public class EncomendaController {
         return encomendaService.listarEncomendasDoOperador(usuario.getIdUsuario());
     }
     
-    @GetMapping("/encomendas/nao/atribuidas/operador")
+    @GetMapping("/operador/encomendas/nao/atribuidas")
     public List<EncomendaDTO> listarEncomendasNaoAtribuidasDoOperador(@RequestHeader("Authorization") String auth) {
         String token = auth.replace("Bearer ", "");
         
@@ -48,7 +48,7 @@ public class EncomendaController {
         
         UsuarioDTO usuario = tokenService.extrairClaim(token);
 
-        return encomendaService.listarEncomendasDoOperador(usuario.getIdUsuario());
+        return encomendaService.listarEncomendasNaoAtribuidasDoOperador(usuario.getIdUsuario());
     }
 
 }

@@ -41,8 +41,8 @@ public class EncomendaService {
         EncomendaDTO encomenda = new EncomendaDTO();
         encomenda.setCodigoRastreioEncomenda(this.gerarCodigoRastreio());
         encomenda.setEnderecoAtualEncomenda("Centro de Distribuição de Origem");
-        encomenda.setStatusEncomenda("em separacao");
-        encomenda.setAtribuicaoEncomenda("nao atribuida");
+        encomenda.setStatusEncomenda("em separação");
+        encomenda.setAtribuicaoEncomenda("não atribuída");
         encomenda.setCliente(cliente);
         encomenda.setOperadorLogistico(operador);
 

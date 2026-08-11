@@ -9,6 +9,7 @@ import com.projeto.tcc.model.EntregaDTO;
 import com.projeto.tcc.model.EntregadorDTO;
 import com.projeto.tcc.repository.EntregaRepository;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,14 +69,14 @@ public class EntregaService {
         encomenda.setStatusEncomenda("entregue");
         encomendaService.salvarEncomenda(encomenda);
 
-        LocalDateTime dataConclusao = LocalDateTime.now();
+        LocalDateTime dataConclusao = LocalDateTime.now().withNano(0);
         entrega.setDataHoraEntrega(dataConclusao);
         EntregaDTO entregaAtualizada = entregaRepository.save(entrega);
 
         entregadorService.atualizarDisponibilidade(entrega.getEntregador(), "disponível");
 
         usuarioService.enviarEmail(encomenda.getCliente().getEmailCliente(),
-            "Belka PVC Encomendas - Entrega concluída", "Sua encomenda foi entregue com sucesso em: " + dataConclusao);
+            "Belka PVC Encomendas - Entrega concluída", "Sua encomenda foi entregue em: " + dataConclusao.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME).replace("T", " as "));
 
         return entregaAtualizada;
     }

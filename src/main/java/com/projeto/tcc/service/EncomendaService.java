@@ -21,19 +21,19 @@ public class EncomendaService {
 
     @Autowired
     private EncomendaRepository encomendaRepository;
-    
+
     @Autowired
     private ClienteService clienteService;
-    
+
     @Autowired
     private OperadorLogisticoService operadorLogisticoService;
-    
+
     @Autowired
     private UsuarioService usuarioService;
-    
+
     @Autowired
     private EntregaService entregaService;
-    
+
     public EncomendaDTO cadastrarEncomenda(Integer idOperadorLogistico, ClienteDTO clienteRequest) {
         OperadorLogisticoDTO operador = operadorLogisticoService.buscarOperadorPorId(idOperadorLogistico);
         ClienteDTO cliente = clienteService.cadastrarCliente(clienteRequest);
@@ -52,23 +52,23 @@ public class EncomendaService {
                 cliente.getEmailCliente(), "Belka PVC Encomendas - Código de Rastreio", "Sua encomenda foi cadastrada."
                 + "\nCódigo de rastreio: " + encomendaSalva.getCodigoRastreioEncomenda());
 
-        return encomendaSalva;   
+        return encomendaSalva;
     }
-    
-    public EncomendaDTO buscarEncomendaPorId(Integer idEncomenda){
+
+    public EncomendaDTO buscarEncomendaPorId(Integer idEncomenda) {
         EncomendaDTO encomenda = encomendaRepository.findByIdEncomenda(idEncomenda);
-        
-        if(encomenda == null){
+
+        if (encomenda == null) {
             throw new ResponseStatusException(HttpStatusCode.valueOf(404), "Encomenda não encontrada");
         }
-        
+
         return encomenda;
     }
-    
+
     public EncomendaDTO salvarEncomenda(EncomendaDTO encomenda) {
         return encomendaRepository.save(encomenda);
-}
-    
+    }
+
     public String gerarCodigoRastreio() {
         Random random = new Random();
         String codigo;
@@ -94,56 +94,62 @@ public class EncomendaService {
 
         return encomenda;
     }
-    
+
     public EncomendaDTO atualizarStatus(Integer idEntrega, String novoStatus) {
         EntregaDTO entrega = entregaService.verEntrega(idEntrega);
         EncomendaDTO encomenda = entrega.getEncomenda();
         encomenda.setStatusEncomenda(novoStatus);
-        
+
         if (novoStatus.equalsIgnoreCase("em transporte")) {
             EncomendaDTO encomendaAtualizada = encomendaRepository.save(encomenda);
- 
+
             usuarioService.enviarEmail(
                     encomenda.getCliente().getEmailCliente(),
-                    "Belka PVC Encomendas",
-                    "Sua encomenda está em transporte.");
- 
+                    "Belka PVC Encomendas - Em transporte",
+                    "Sua encomenda está em transporte./nLocal atual da Encomenda" + encomenda.getEnderecoAtualEncomenda());
+
             return encomendaAtualizada;
- 
+
         } else if (novoStatus.equalsIgnoreCase("em rota de entrega")) {
             EncomendaDTO encomendaAtualizada = encomendaRepository.save(encomenda);
- 
+
             usuarioService.enviarEmail(
                     encomenda.getCliente().getEmailCliente(),
                     "Belka PVC Encomendas - Código de confirmação",
-                    "Sua encomenda está em rota de entrega. Código OTP: " + entrega.getCodigoOtpEntrega());
- 
+                    "Sua encomenda está em rota de entrega.\nCódigo OTP: " + entrega.getCodigoOtpEntrega());
+
             return encomendaAtualizada;
- 
+
+        }
+
+        List<String> sequencia = List.of("em transporte", "em rota de entrega");
+        if (sequencia.indexOf(novoStatus) != sequencia.indexOf(encomenda.getStatusEncomenda()) + 1) {
+            throw new ResponseStatusException(HttpStatusCode.valueOf(409), "Ordem de transição da encomenda incorreto, siga a ordem correta");
         } else {
             throw new ResponseStatusException(HttpStatusCode.valueOf(400), "Status da encomenda inválido");
         }
+
     }
-    
+
     public EncomendaDTO atualizarLocalAtual(Integer idEntrega, String novoLocal) {
         EntregaDTO entrega = entregaService.verEntrega(idEntrega);
         EncomendaDTO encomenda = entrega.getEncomenda();
         encomenda.setEnderecoAtualEncomenda(novoLocal);
-        
+
         return encomendaRepository.save(encomenda);
     }
-    
+
     public List<EncomendaDTO> listarEncomendasDoOperador(Integer idOperadorLogistico) {
-        return encomendaRepository.findByOperadorLogistico_idUsuario(idOperadorLogistico);      
+        return encomendaRepository.findByOperadorLogistico_idUsuario(idOperadorLogistico);
     }
-    
+
     public List<EncomendaDTO> listarEncomendasNaoAtribuidasDoOperador(Integer idOperadorLogistico) {
         return encomendaRepository.findByOperadorLogistico_idUsuarioAndAtribuicaoEncomenda(idOperadorLogistico, "não atribuída");
     }
-    
-    public EncomendaDTO atualizarAtribuicaoDaEncomenda(EncomendaDTO encomenda, String novaAtribuicao){
+
+    public EncomendaDTO atualizarAtribuicaoDaEncomenda(EncomendaDTO encomenda, String novaAtribuicao) {
         encomenda.setAtribuicaoEncomenda(novaAtribuicao);
-        
+
         return encomendaRepository.save(encomenda);
     }
 

@@ -98,16 +98,24 @@ public class EncomendaService {
     public EncomendaDTO atualizarStatus(Integer idEntrega, String novoStatus) {
         EntregaDTO entrega = entregaService.verEntrega(idEntrega);
         EncomendaDTO encomenda = entrega.getEncomenda();
+        List<String> sequencia = List.of("em transporte", "em rota de entrega");
+ 
+        String statusAtual = encomenda.getStatusEncomenda();
+ 
+        if (sequencia.indexOf(novoStatus) != sequencia.indexOf(statusAtual) + 1) {
+            throw new ResponseStatusException(HttpStatusCode.valueOf(409), "Ordem de transição da encomenda incorreta, siga a ordem correta");
+        }
+ 
         encomenda.setStatusEncomenda(novoStatus);
-
+ 
         if (novoStatus.equalsIgnoreCase("em transporte")) {
             EncomendaDTO encomendaAtualizada = encomendaRepository.save(encomenda);
-
+ 
             usuarioService.enviarEmail(
                     encomenda.getCliente().getEmailCliente(),
                     "Belka PVC Encomendas - Em transporte",
-                    "Sua encomenda está em transporte./nLocal atual da Encomenda" + encomenda.getEnderecoAtualEncomenda());
-
+                    "Sua encomenda está em transporte.\nLocal atual da Encomenda: " + encomenda.getEnderecoAtualEncomenda());
+ 
             return encomendaAtualizada;
 
         } else if (novoStatus.equalsIgnoreCase("em rota de entrega")) {
@@ -120,11 +128,6 @@ public class EncomendaService {
 
             return encomendaAtualizada;
 
-        }
-
-        List<String> sequencia = List.of("em transporte", "em rota de entrega");
-        if (sequencia.indexOf(novoStatus) != sequencia.indexOf(encomenda.getStatusEncomenda()) + 1) {
-            throw new ResponseStatusException(HttpStatusCode.valueOf(409), "Ordem de transição da encomenda incorreto, siga a ordem correta");
         } else {
             throw new ResponseStatusException(HttpStatusCode.valueOf(400), "Status da encomenda inválido");
         }

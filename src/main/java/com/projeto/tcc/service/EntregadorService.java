@@ -8,7 +8,6 @@ import com.projeto.tcc.model.EncomendaDTO;
 import com.projeto.tcc.model.EntregaDTO;
 import com.projeto.tcc.model.EntregadorDTO;
 import com.projeto.tcc.repository.EntregadorRepository;
-import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
@@ -74,8 +73,6 @@ public class EntregadorService extends UsuarioService {
         EntregaDTO entrega = new EntregaDTO();
         entrega.setEncomenda(encomenda);
         entrega.setEntregador(entregador);
-        entrega.setDataHoraEntrega(LocalDateTime.now());
-        entrega.setCodigoOtpEntrega(entregaService.gerarCodigoOtp());
 
         EntregaDTO entregaSalva = entregaService.salvarEntrega(entrega);
 

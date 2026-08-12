@@ -24,10 +24,10 @@ public class EntregaDTO {
     @Column(name = "id_entrega")
     private Integer idEntrega;
     
-    @Column(name = "data_hora_entrega", nullable = false)
+    @Column(name = "data_hora_entrega")
     private LocalDateTime dataHoraEntrega;
  
-    @Column(name = "codigo_otp_entrega", nullable = false)
+    @Column(name = "codigo_otp_entrega")
     private String codigoOtpEntrega;
  
     @OneToOne

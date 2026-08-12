@@ -101,7 +101,7 @@ public class EncomendaService {
         List<String> sequencia = List.of("em transporte", "em rota de entrega");
  
         String statusAtual = encomenda.getStatusEncomenda();
- 
+
         if (sequencia.indexOf(novoStatus) != sequencia.indexOf(statusAtual) + 1) {
             throw new ResponseStatusException(HttpStatusCode.valueOf(409), "Ordem de transição da encomenda incorreta, siga a ordem correta");
         }
@@ -119,6 +119,10 @@ public class EncomendaService {
             return encomendaAtualizada;
 
         } else if (novoStatus.equalsIgnoreCase("em rota de entrega")) {
+            String codigoOtp = entregaService.gerarCodigoOtp();
+            entrega.setCodigoOtpEntrega(codigoOtp);
+            entregaService.salvarEntrega(entrega);
+            
             EncomendaDTO encomendaAtualizada = encomendaRepository.save(encomenda);
 
             usuarioService.enviarEmail(

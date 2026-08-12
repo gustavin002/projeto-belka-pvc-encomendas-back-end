@@ -8,18 +8,16 @@ import com.projeto.tcc.model.EncomendaDTO;
 import com.projeto.tcc.service.EncomendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/clientes")
 public class ClienteController {
     
     @Autowired
     private EncomendaService encomendaService;
 
-    @GetMapping("/rastreio/{codigoRastreio}")
+    @GetMapping("/cliente/rastreio/{codigoRastreio}")
     public EncomendaDTO rastrearEncomenda(@PathVariable String codigoRastreio) {
         return encomendaService.rastrearEncomenda(codigoRastreio);
     }

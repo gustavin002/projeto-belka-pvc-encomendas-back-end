@@ -114,7 +114,7 @@ public class EncomendaService {
             usuarioService.enviarEmail(
                     encomenda.getCliente().getEmailCliente(),
                     "Belka PVC Encomendas - Em transporte",
-                    "Sua encomenda está em transporte.\nLocal atual da Encomenda: " + encomenda.getEnderecoAtualEncomenda());
+                    "Sua encomenda está em transporte.");
  
             return encomendaAtualizada;
 

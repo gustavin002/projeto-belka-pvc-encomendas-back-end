@@ -39,7 +39,7 @@ CREATE TABLE `tb_admin` (
 
 LOCK TABLES `tb_admin` WRITE;
 /*!40000 ALTER TABLE `tb_admin` DISABLE KEYS */;
-INSERT INTO `tb_admin` VALUES (1,'admin@gmail.com','admin1010');
+INSERT INTO `tb_admin` VALUES (1,'admin@gmail.com','gugu2312');
 /*!40000 ALTER TABLE `tb_admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,7 +100,7 @@ CREATE TABLE `tb_encomenda` (
 
 LOCK TABLES `tb_encomenda` WRITE;
 /*!40000 ALTER TABLE `tb_encomenda` DISABLE KEYS */;
-INSERT INTO `tb_encomenda` VALUES (1,'67674','Centro de Distribuição de Origem','em separação','não atribuída',1,1),(2,'77778','Centro de Distribuição de Origem','em separação','não atribuída',1,1),(3,'33317','Centro de Distribuição de Origem','em separação','não atribuída',2,2),(4,'99881','Rua Joao Batista - Londrina','em transporte','atribuída',2,2),(5,'35783','Centro de Distribuição de Origem','em separação','não atribuída',3,3),(6,'25386','Centro de Distribuição de Origem','em separação','não atribuída',3,3),(7,'23729','Rua Jaco Figueiredo - Cambé','em rota de entrega','atribuída',4,4),(8,'12895','Rua Gustavo Lorenzo 23 - Arapiraca','entregue','atribuída',4,4),(9,'38942','Centro de Distribuição de Origem','em separação','não atribuída',5,5),(10,'84743','Centro de Distribuição de Origem','em separação','não atribuída',5,5);
+INSERT INTO `tb_encomenda` VALUES (1,'67674','Centro de Distribuição de Origem','em separação','não atribuída',1,1),(2,'77778','Centro de Distribuição de Origem','em separação','não atribuída',1,1),(3,'33317','Centro de Distribuição de Origem','em separação','não atribuída',2,2),(4,'35783','Centro de Distribuição de Origem','em separação','não atribuída',2,2),(5,'25386','Centro de Distribuição de Origem','em separação','não atribuída',3,3),(6,'38942','Centro de Distribuição de Origem','em separação','não atribuída',3,3),(7,'84743','Centro de Distribuição de Origem','em separação','não atribuída',3,3),(8,'99881','Rua Joao Batista - Londrina','em transporte','atribuída',5,5),(9,'23729','Rua Jaco Figueiredo - Cambé','em rota de entrega','atribuída',4,4),(10,'12895','Rua Gustavo Lorenzo 23 - Arapiraca','entregue','atribuída',4,4);
 /*!40000 ALTER TABLE `tb_encomenda` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,7 +131,7 @@ CREATE TABLE `tb_entrega` (
 
 LOCK TABLES `tb_entrega` WRITE;
 /*!40000 ALTER TABLE `tb_entrega` DISABLE KEYS */;
-INSERT INTO `tb_entrega` VALUES (1,NULL,NULL,4,7),(2,NULL,'456852',7,8),(3,'2026-08-11 14:30:00','357159',8,9);
+INSERT INTO `tb_entrega` VALUES (1,NULL,NULL,7,8),(2,NULL,'456852',9,9),(3,'2026-08-11 14:30:00','357159',8,10);
 /*!40000 ALTER TABLE `tb_entrega` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,7 +160,7 @@ CREATE TABLE `tb_usuario` (
 
 LOCK TABLES `tb_usuario` WRITE;
 /*!40000 ALTER TABLE `tb_usuario` DISABLE KEYS */;
-INSERT INTO `tb_usuario` VALUES (1,'Daniel','operador1@gmail.com','operador1010','operador logistico','disponível'),(2,'João','operador2@gmail.com','operador1020','operador logistico','disponível'),(3,'Gabriel','operador3@gmail.com','operador1030','operador logistico','disponível'),(4,'Matheus','operador4@gmail.com','operador1040','operador logistico','disponível'),(5,'Luiz','operador5@gmail.com','operador1050','operador logistico','disponível'),(6,'Gustavo','gustavo.m.silva87@aluno.senai.br','entregador1010','entregador','disponível'),(7,'Estevão','entregador2@gmail.com','entregador1020','entregador','indisponível'),(8,'Pedro','entregador3@gmail.com','entregador1030','entregador','indisponível'),(9,'Ananias','entregador4@gmail.com','entregador1040','entregador','disponível'),(10,'José','entregador5@gmail.com','entregador1050','entregador','disponível');
+INSERT INTO `tb_usuario` VALUES (1,'Daniel','daniel@gmail.com','gugu2312','operador logistico','disponível'),(2,'João','joao@gmail.com','gugu2312','operador logistico','disponível'),(3,'Gabriel','gabriel@gmail.com','gugu2312','operador logistico','disponível'),(4,'Matheus','matheus@gmail.com','gugu2312','operador logistico','disponível'),(5,'Luiz','luiz@gmail.com','gugu2312','operador logistico','disponível'),(6,'Gustavo','gustavo.m.silva87@aluno.senai.br','gugu2312','entregador','disponível'),(7,'Estevão','estevao@gmail.com','gugu2312','entregador','disponível'),(8,'Pedro','pedro@gmail.com','gugu2312','entregador','indisponível'),(9,'Ananias','ananias@gmail.com','gugu2312','entregador','indisponível'),(10,'José','jose@gmail.com','gugu2312','entregador','disponível');
 /*!40000 ALTER TABLE `tb_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -173,4 +173,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-08-13 14:19:31
+-- Dump completed on 2026-08-13 17:15:41

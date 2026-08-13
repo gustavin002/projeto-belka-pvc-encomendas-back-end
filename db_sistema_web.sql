@@ -56,8 +56,8 @@ insert into tb_usuario (nome_usuario, email_usuario, senha_usuario, role_usuario
 ('Luiz', 'operador5@gmail.com', 'operador1050', 'operador logistico', 'disponível'),
 
 ('Gustavo', 'gustavo.m.silva87@aluno.senai.br', 'entregador1010', 'entregador', 'disponível'),
-('Estevão', 'entregador2@gmail.com', 'entregador1020', 'entregador', 'disponível'),
-('Pedro', 'entregador3@gmail.com', 'entregador1030', 'entregador', 'disponível'),
+('Estevão', 'entregador2@gmail.com', 'entregador1020', 'entregador', 'indisponível'),
+('Pedro', 'entregador3@gmail.com', 'entregador1030', 'entregador', 'indisponível'),
 ('Ananias', 'entregador4@gmail.com', 'entregador1040', 'entregador', 'disponível'),
 ('José', 'entregador5@gmail.com', 'entregador1050', 'entregador', 'disponível');
 
@@ -70,20 +70,17 @@ insert into tb_cliente (nome_cliente, email_cliente, endereco_cliente) values
 
 insert into tb_encomenda (codigo_rastreio_encomenda, endereco_atual_encomenda, status_encomenda, atribuicao_encomenda, id_cliente, id_operador_logistico) values
 ('67674', 'Centro de Distribuição de Origem', 'em separação', 'não atribuída', 1, 1),
-('77778', 'Rua são goinhas - Maringa', 'em transporte', 'atribuída', 1, 1),
+('77778', 'Centro de Distribuição de Origem', 'em separação', 'não atribuída', 1, 1),
 ('33317', 'Centro de Distribuição de Origem', 'em separação', 'não atribuída', 2, 2),
 ('99881', 'Rua Joao Batista - Londrina', 'em transporte', 'atribuída', 2, 2),
 ('35783', 'Centro de Distribuição de Origem', 'em separação', 'não atribuída', 3, 3),
-('25386', 'Rua Jaco Figueiredo - Cambé', 'em transporte', 'atribuída', 3, 3),
-('23729', 'Centro de Distribuição de Origem', 'em rota de entrega', 'atribuída', 4, 4),
-('12895', 'Rua Gustavo Lorenzo - Arapiraca', 'entregue', 'atribuída', 4, 4),
-('38942', 'Centro de Distribuição de Origem', 'em rota de entrega', 'atribuída', 5, 5),
-('84743', 'Rua Matheus Martins - Joinville', 'entregue', 'atribuída', 5, 5);
+('25386', 'Centro de Distribuição de Origem', 'em separação', 'não atribuída', 3, 3),
+('23729', 'Rua Jaco Figueiredo - Cambé', 'em rota de entrega', 'atribuída', 4, 4),
+('12895', 'Rua Gustavo Lorenzo 23 - Arapiraca', 'entregue', 'atribuída', 4, 4),
+('38942', 'Centro de Distribuição de Origem', 'em separação', 'não atribuída', 5, 5),
+('84743', 'Centro de Distribuição de Origem', 'em separação', 'não atribuída', 5, 5);
 
 insert into tb_entrega (data_hora_entrega, codigo_otp_entrega, id_encomenda, id_usuario) values
-(null, null, 2, 6),
 (null, null, 4, 7),
-(NULL, '456852', 7, 8),
-('2026-08-11 14:30:00', '357159', 8, 9),
-(NULL, '456852', 9, 8),
-('2026-08-12 10:15:00', '951753', 10, 10);
+(null, '456852', 7, 8),
+('2026-08-11 14:30:00', '357159', 8, 9);

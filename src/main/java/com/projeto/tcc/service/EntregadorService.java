@@ -4,7 +4,7 @@
  */
 package com.projeto.tcc.service;
 
-import com.projeto.tcc.model.EncomendaDTO;
+import com.projeto.tcc.model.EncomendasDTO;
 import com.projeto.tcc.model.EntregaDTO;
 import com.projeto.tcc.model.EntregadorDTO;
 import com.projeto.tcc.repository.EntregadorRepository;
@@ -67,7 +67,7 @@ public class EntregadorService extends UsuarioService {
     }
 
     public EntregaDTO escolherEntregadorParaEncomenda(Integer idEncomenda, Integer idEntregador) {
-        EncomendaDTO encomenda = encomendaService.buscarEncomendaPorId(idEncomenda);
+        EncomendasDTO encomenda = encomendaService.buscarEncomendaPorId(idEncomenda);
         EntregadorDTO entregador = this.buscarEntregadorPorId(idEntregador);
 
         EntregaDTO entrega = new EntregaDTO();

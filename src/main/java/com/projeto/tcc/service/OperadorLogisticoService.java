@@ -4,7 +4,7 @@
  */
 package com.projeto.tcc.service;
 
-import com.projeto.tcc.model.EncomendaDTO;
+import com.projeto.tcc.model.EncomendasDTO;
 import com.projeto.tcc.model.EntregadorDTO;
 import com.projeto.tcc.model.OperadorLogisticoDTO;
 import com.projeto.tcc.repository.OperadorLogisticoRepository;
@@ -49,7 +49,7 @@ public class OperadorLogisticoService extends UsuarioService {
         return operadorLogisticoRepository.findAll();
     }
 
-    public void enviarEmailEntregador(EntregadorDTO entregador, EncomendaDTO encomenda) {
+    public void enviarEmailEntregador(EntregadorDTO entregador, EncomendasDTO encomenda) {
         this.enviarEmail(entregador.getEmailUsuario(),"Belka PVC Encomendas - Nova entrega atribuída", "Cliente: " +
             encomenda.getCliente().getNomeCliente()
             + "\nEndereço de entrega: " + encomenda.getCliente().getEnderecoCliente());

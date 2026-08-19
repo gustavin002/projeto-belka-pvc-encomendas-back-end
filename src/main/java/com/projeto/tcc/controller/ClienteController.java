@@ -4,7 +4,7 @@
  */
 package com.projeto.tcc.controller;
 
-import com.projeto.tcc.model.EncomendaDTO;
+import com.projeto.tcc.model.EncomendasDTO;
 import com.projeto.tcc.service.EncomendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +18,7 @@ public class ClienteController {
     private EncomendaService encomendaService;
 
     @GetMapping("/cliente/rastreio/{codigoRastreio}")
-    public EncomendaDTO rastrearEncomenda(@PathVariable String codigoRastreio) {
+    public EncomendasDTO rastrearEncomenda(@PathVariable String codigoRastreio) {
         return encomendaService.rastrearEncomenda(codigoRastreio);
     }
     

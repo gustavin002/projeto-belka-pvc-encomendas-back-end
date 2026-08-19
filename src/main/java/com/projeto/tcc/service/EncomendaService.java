@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import com.projeto.tcc.model.ClienteDTO;
-import com.projeto.tcc.model.EncomendaDTO;
+import com.projeto.tcc.model.EncomendasDTO;
 import com.projeto.tcc.model.EntregaDTO;
 import com.projeto.tcc.model.OperadorLogisticoDTO;
 import com.projeto.tcc.repository.EncomendaRepository;
@@ -34,11 +34,11 @@ public class EncomendaService {
     @Autowired
     private EntregaService entregaService;
 
-    public EncomendaDTO cadastrarEncomenda(Integer idOperadorLogistico, ClienteDTO clienteRequest) {
+    public EncomendasDTO cadastrarEncomenda(Integer idOperadorLogistico, ClienteDTO clienteRequest) {
         OperadorLogisticoDTO operador = operadorLogisticoService.buscarOperadorPorId(idOperadorLogistico);
         ClienteDTO cliente = clienteService.cadastrarCliente(clienteRequest);
 
-        EncomendaDTO encomenda = new EncomendaDTO();
+        EncomendasDTO encomenda = new EncomendasDTO();
         encomenda.setCodigoRastreioEncomenda(this.gerarCodigoRastreio());
         encomenda.setEnderecoAtualEncomenda("Centro de Distribuição de Origem");
         encomenda.setStatusEncomenda("em separação");
@@ -46,7 +46,7 @@ public class EncomendaService {
         encomenda.setCliente(cliente);
         encomenda.setOperadorLogistico(operador);
 
-        EncomendaDTO encomendaSalva = encomendaRepository.save(encomenda);
+        EncomendasDTO encomendaSalva = encomendaRepository.save(encomenda);
 
         usuarioService.enviarEmail(
                 cliente.getEmailCliente(), "Belka PVC Encomendas - Código de Rastreio", "Sua encomenda foi cadastrada."
@@ -55,8 +55,8 @@ public class EncomendaService {
         return encomendaSalva;
     }
 
-    public EncomendaDTO buscarEncomendaPorId(Integer idEncomenda) {
-        EncomendaDTO encomenda = encomendaRepository.findByIdEncomenda(idEncomenda);
+    public EncomendasDTO buscarEncomendaPorId(Integer idEncomenda) {
+        EncomendasDTO encomenda = encomendaRepository.findByIdEncomenda(idEncomenda);
 
         if (encomenda == null) {
             throw new ResponseStatusException(HttpStatusCode.valueOf(404), "Encomenda não encontrada");
@@ -65,7 +65,7 @@ public class EncomendaService {
         return encomenda;
     }
 
-    public EncomendaDTO salvarEncomenda(EncomendaDTO encomenda) {
+    public EncomendasDTO salvarEncomenda(EncomendasDTO encomenda) {
         return encomendaRepository.save(encomenda);
     }
 
@@ -85,8 +85,8 @@ public class EncomendaService {
         return codigo;
     }
 
-    public EncomendaDTO rastrearEncomenda(String codigoRastreio) {
-        EncomendaDTO encomenda = encomendaRepository.findByCodigoRastreioEncomenda(codigoRastreio);
+    public EncomendasDTO rastrearEncomenda(String codigoRastreio) {
+        EncomendasDTO encomenda = encomendaRepository.findByCodigoRastreioEncomenda(codigoRastreio);
 
         if (encomenda == null) {
             throw new ResponseStatusException(HttpStatusCode.valueOf(404), "Código de rastreio não encontrado");
@@ -95,9 +95,9 @@ public class EncomendaService {
         return encomenda;
     }
 
-    public EncomendaDTO atualizarStatus(Integer idEntrega, String novoStatus) {
+    public EncomendasDTO atualizarStatus(Integer idEntrega, String novoStatus) {
         EntregaDTO entrega = entregaService.verEntrega(idEntrega);
-        EncomendaDTO encomenda = entrega.getEncomenda();
+        EncomendasDTO encomenda = entrega.getEncomenda();
         List<String> sequencia = List.of("em transporte", "em rota de entrega");
  
         String statusAtual = encomenda.getStatusEncomenda();
@@ -109,7 +109,7 @@ public class EncomendaService {
         encomenda.setStatusEncomenda(novoStatus);
  
         if (novoStatus.equalsIgnoreCase("em transporte")) {
-            EncomendaDTO encomendaAtualizada = encomendaRepository.save(encomenda);
+            EncomendasDTO encomendaAtualizada = encomendaRepository.save(encomenda);
  
             usuarioService.enviarEmail(
                     encomenda.getCliente().getEmailCliente(),
@@ -123,7 +123,7 @@ public class EncomendaService {
             entrega.setCodigoOtpEntrega(codigoOtp);
             entregaService.salvarEntrega(entrega);
             
-            EncomendaDTO encomendaAtualizada = encomendaRepository.save(encomenda);
+            EncomendasDTO encomendaAtualizada = encomendaRepository.save(encomenda);
 
             usuarioService.enviarEmail(
                     encomenda.getCliente().getEmailCliente(),
@@ -138,23 +138,23 @@ public class EncomendaService {
 
     }
 
-    public EncomendaDTO atualizarLocalAtual(Integer idEntrega, String novoLocal) {
+    public EncomendasDTO atualizarLocalAtual(Integer idEntrega, String novoLocal) {
         EntregaDTO entrega = entregaService.verEntrega(idEntrega);
-        EncomendaDTO encomenda = entrega.getEncomenda();
+        EncomendasDTO encomenda = entrega.getEncomenda();
         encomenda.setEnderecoAtualEncomenda(novoLocal);
 
         return encomendaRepository.save(encomenda);
     }
 
-    public List<EncomendaDTO> listarEncomendasDoOperador(Integer idOperadorLogistico) {
+    public List<EncomendasDTO> listarEncomendasDoOperador(Integer idOperadorLogistico) {
         return encomendaRepository.findByOperadorLogistico_idUsuario(idOperadorLogistico);
     }
 
-    public List<EncomendaDTO> listarEncomendasNaoAtribuidasDoOperador(Integer idOperadorLogistico) {
+    public List<EncomendasDTO> listarEncomendasNaoAtribuidasDoOperador(Integer idOperadorLogistico) {
         return encomendaRepository.findByOperadorLogistico_idUsuarioAndAtribuicaoEncomenda(idOperadorLogistico, "não atribuída");
     }
 
-    public EncomendaDTO atualizarAtribuicaoDaEncomenda(EncomendaDTO encomenda, String novaAtribuicao) {
+    public EncomendasDTO atualizarAtribuicaoDaEncomenda(EncomendasDTO encomenda, String novaAtribuicao) {
         encomenda.setAtribuicaoEncomenda(novaAtribuicao);
 
         return encomendaRepository.save(encomenda);

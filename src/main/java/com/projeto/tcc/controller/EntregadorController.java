@@ -4,7 +4,7 @@
  */
 package com.projeto.tcc.controller;
 
-import com.projeto.tcc.model.EncomendaDTO;
+import com.projeto.tcc.model.EncomendasDTO;
 import com.projeto.tcc.model.EntregaDTO;
 import com.projeto.tcc.service.EncomendaService;
 import com.projeto.tcc.service.EntregaService;
@@ -44,7 +44,7 @@ public class EntregadorController {
     }
 
     @PutMapping("/entregador/entrega/{idEntrega}/status")
-    public EncomendaDTO atualizarStatus(@RequestHeader("Authorization") String auth, @PathVariable Integer idEntrega, @RequestParam String novoStatus) {
+    public EncomendasDTO atualizarStatus(@RequestHeader("Authorization") String auth, @PathVariable Integer idEntrega, @RequestParam String novoStatus) {
         String token = auth.replace("Bearer ", "");
         
         if(!tokenService.validarToken(token)){
@@ -55,7 +55,7 @@ public class EntregadorController {
     }
 
      @PutMapping("/entregador/entrega/{idEntrega}/local")
-    public EncomendaDTO atualizarLocalAtual(@RequestHeader("Authorization") String auth, @PathVariable Integer idEntrega, @RequestParam String novoLocal) {
+    public EncomendasDTO atualizarLocalAtual(@RequestHeader("Authorization") String auth, @PathVariable Integer idEntrega, @RequestParam String novoLocal) {
         String token = auth.replace("Bearer ", "");
         
         if(!tokenService.validarToken(token)){

@@ -4,7 +4,7 @@
  */
 package com.projeto.tcc.service;
 
-import com.projeto.tcc.model.EncomendaDTO;
+import com.projeto.tcc.model.EncomendasDTO;
 import com.projeto.tcc.model.EntregaDTO;
 import com.projeto.tcc.model.EntregadorDTO;
 import com.projeto.tcc.repository.EntregaRepository;
@@ -65,7 +65,7 @@ public class EntregaService {
             throw new ResponseStatusException(HttpStatusCode.valueOf(400), "Código OTP inválido");
         }
 
-        EncomendaDTO encomenda = entrega.getEncomenda();
+        EncomendasDTO encomenda = entrega.getEncomenda();
         encomenda.setStatusEncomenda("entregue");
         encomendaService.salvarEncomenda(encomenda);
 

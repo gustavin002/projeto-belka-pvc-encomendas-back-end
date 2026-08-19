@@ -32,7 +32,7 @@ public class EntregaDTO {
  
     @OneToOne
     @JoinColumn(name = "id_encomenda", nullable = false)
-    private EncomendasDTO encomenda;
+    private EncomendaDTO encomenda;
  
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
@@ -62,11 +62,11 @@ public class EntregaDTO {
         this.codigoOtpEntrega = codigoOtpEntrega;
     }
 
-    public EncomendasDTO getEncomenda() {
+    public EncomendaDTO getEncomenda() {
         return encomenda;
     }
 
-    public void setEncomenda(EncomendasDTO encomenda) {
+    public void setEncomenda(EncomendaDTO encomenda) {
         this.encomenda = encomenda;
     }
 

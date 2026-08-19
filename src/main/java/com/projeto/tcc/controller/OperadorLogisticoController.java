@@ -5,7 +5,7 @@
 package com.projeto.tcc.controller;
 
 import com.projeto.tcc.model.ClienteDTO;
-import com.projeto.tcc.model.EncomendasDTO;
+import com.projeto.tcc.model.EncomendaDTO;
 import com.projeto.tcc.model.EntregaDTO;
 import com.projeto.tcc.model.EntregadorDTO;
 import com.projeto.tcc.model.UsuarioDTO;
@@ -36,7 +36,7 @@ public class OperadorLogisticoController {
     private EntregadorService entregadorService;
 
     @PostMapping("/operador/cadastrar/encomendas")
-    public EncomendasDTO cadastrarEncomenda(@RequestHeader("Authorization") String auth, @RequestBody ClienteDTO clienteRequest) {
+    public EncomendaDTO cadastrarEncomenda(@RequestHeader("Authorization") String auth, @RequestBody ClienteDTO clienteRequest) {
         String token = auth.replace("Bearer ", "");
         
         if (!tokenService.validarToken(token)) {

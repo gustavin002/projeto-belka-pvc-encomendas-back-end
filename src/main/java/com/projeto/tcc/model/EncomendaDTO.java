@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_encomenda")
-public class EncomendasDTO {
+public class EncomendaDTO {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
